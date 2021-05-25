@@ -22,12 +22,12 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'forestus7',
-        password: 'sugoi777',
+        email: 'forestus7@gmail.com',
         passwordConfirmation: 'sugoi777'
       }
     }
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('email'))
+    expect(httpResponse.body).toEqual(new MissingParamError('password'))
   })
 })
