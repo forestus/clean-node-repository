@@ -11,5 +11,8 @@ describe('SignUp Controller', () => {
         }
         const httpResponse = sut.handle(httpRequest);
         expect(httpResponse.statusCode).toBe(400);
+        //to be compara também o ponteiro dos objetos
+        //toequal compara os valores apenas
+        expect(httpResponse.body).toEqual(new Error('Missing param: name'));
     });
 });
