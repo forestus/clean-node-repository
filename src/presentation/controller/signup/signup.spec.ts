@@ -14,8 +14,8 @@ const makeAddAccount = (): AddAccount => {
   class AddAccountSub implements AddAccount {
     add (account: AddAccountModel): AccountModel {
       const fakeAccount = {
-        id: 'valid_id',
-        name: 'valid_name',
+        id: '1',
+        name: 'forestus7',
         email: 'forestus7@gmail.com',
         password: 'sugoi777'
       }
@@ -56,7 +56,6 @@ describe('SignUp Controller', () => {
     // toequal compara os valores apenas
     expect(httpResponse.body).toEqual(new MissingParamError('name'))
   })
-
   test('should return 400 if no email is provided', () => {
     const { sut } = makeSut()
     const httpRequest = {
@@ -70,7 +69,6 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('email'))
   })
-
   test('should return 400 if no password is provided', () => {
     const { sut } = makeSut()
     const httpRequest = {
@@ -97,7 +95,6 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('passwordConfirmation'))
   })
-
   test('should return 400 if password confirmation fails', () => {
     const { sut } = makeSut()
     const httpRequest = {
@@ -112,7 +109,6 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamError('passwordConfirmation'))
   })
-
   test('should return 400 if an invalid email is provided', () => {
     const { sut, emailValidatorSub } = makeSut()
     // alteração do valor do mock
@@ -196,5 +192,24 @@ describe('SignUp Controller', () => {
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError())
+  })
+  test('should return 200 if an valid data is provided', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'forestus7',
+        email: 'valid@gmail.com',
+        password: 'sugoi777',
+        passwordConfirmation: 'sugoi777'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual({
+      id: '1',
+      name: 'forestus7',
+      email: 'forestus7@gmail.com',
+      password: 'sugoi777'
+    })
   })
 })
