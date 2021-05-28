@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
-    "test:verbose": "npx jest --passWithNoTests  --runInBand",
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
+    "test:verbose": "jest --passWithNoTests  --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
